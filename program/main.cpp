@@ -2,29 +2,43 @@
 #include <iostream>
 
 #include "Graph.hpp"
+#include "memlog.h"
 
 #define SUCCESS (00)
 #define FAILURE (01)
 
+char logName[100] = "data.out";
+
 int main(int argc, char const *argv[])
 {   
+    // Inicialização do log de memória
+    iniciaMemLog(logName);
+    ativaMemLog();
+
     try
     {
+        defineFaseMemLog(0);
         // Construção do grafo com os dados da entrada padrão
         Graph* graph = Graph::BuildFromIoStream();
         
+        defineFaseMemLog(1);
         // Impressão se o grafo é "guloso" ou não
         bool isGreedy = graph->IsGreedy();
         std::cout << isGreedy;
 
         // Impressão dos vértices ordenados caso seja guloso
         if (isGreedy)
+        {
+            defineFaseMemLog(2);
             std::cout << " " << graph->OrderedVertices();
+        }
             
         std::cout << std::endl;
 
         // Limpeza da memória alocada
         delete graph;
+
+        finalizaMemLog();
     }
     catch(element_not_found_exception)
     {

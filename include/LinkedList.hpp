@@ -3,6 +3,8 @@
 #ifndef LINKED_LIST_HPP
 #define LINKED_LIST_HPP
 
+#include "memlog.h"
+
 /**
  * @brief Exceção lançada quando uma operação é executada em uma lista vazia, ou acesso
  * inválido a algum item.
@@ -44,6 +46,9 @@ struct Node
 template <class DataType> 
 class LinkedList
 {
+    private:
+        int _identifier;
+
     protected:
         Node<DataType>* _head;
         Node<DataType>* _tail;
@@ -85,6 +90,12 @@ class LinkedList
             _lastGetIndex = index;
             _lastGetNode = current;
 
+            if (_identifier != -1)
+            {
+                int bits = sizeof(Node<DataType>) + sizeof(DataType);
+                LEMEMLOG((long int)(current),bits,_identifier);
+            }
+
             return current;
         }
 
@@ -100,6 +111,17 @@ class LinkedList
             _head = nullptr;
             _tail = nullptr;
             _size = 0;
+
+            _identifier = -1;
+        };
+
+        LinkedList(int identifier)
+        {
+            _head = nullptr;
+            _tail = nullptr;
+            _size = 0;
+
+            _identifier = identifier;
         };
 
         /**
@@ -158,6 +180,12 @@ class LinkedList
             }
 
             _size++;
+    
+            if (_identifier != -1)
+            {
+                int bits = sizeof(Node<DataType>) + sizeof(DataType);
+                ESCREVEMEMLOG((long int)(newNode), bits, _identifier);
+            }
         }
 
         /**
@@ -233,23 +261,43 @@ class LinkedList
                 throw element_not_found_exception();
 
             if (_lastGetIndex == -1)
+            {
                 return LinearGet(index);
+            }
                 
+            int bits = sizeof(Node<DataType>) + sizeof(DataType);
             if (_lastGetIndex == index) 
-                return _lastGetNode;
+            {
+                auto node = _lastGetNode;
+                if (_identifier != -1)
+                    LEMEMLOG((long int)(node),bits,_identifier);
+                return node;
+            }
 
             if (_lastGetIndex == index - 1)
             {
+                if (_identifier != -1)
+                    LEMEMLOG((long int)(_lastGetNode),bits,_identifier);
+                
                 _lastGetIndex = index;
                 _lastGetNode = _lastGetNode->next;
+
+                if (_identifier != -1)
+                    LEMEMLOG((long int)(_lastGetNode),bits,_identifier);
 
                 return _lastGetNode;
             }
 
             if (_lastGetIndex == index + 1)
             {
+                if (_identifier != -1)
+                    LEMEMLOG((long int)(_lastGetNode),bits,_identifier);
+                
                 _lastGetIndex = index;
                 _lastGetNode = _lastGetNode->previous;
+
+                if (_identifier != -1)
+                    LEMEMLOG((long int)(_lastGetNode),bits,_identifier);
 
                 return _lastGetNode;
             }

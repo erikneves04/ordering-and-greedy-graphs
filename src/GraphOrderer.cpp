@@ -3,6 +3,8 @@
 #include "LinkedList.hpp"
 #include "GraphOrderer.hpp"
 
+#include "memlog.h"
+
 GraphOrderer::GraphOrderer(char option)
 {
     _option = option;
@@ -189,12 +191,14 @@ void Merge(LinkedList<Vertex*>* list, int left, int mid, int right)
     for (int i = 0; i < subArrayOne; i++)
     {
         leftArray[i] = list->Get(left + i);
+        ESCREVEMEMLOG((long int)(&(leftArray[i])), sizeof(Vertex*), 1);
     }
         
         
     for (int j = 0; j < subArrayTwo; j++)
     {
         rightArray[j] = list->Get(mid + 1 + j);
+        ESCREVEMEMLOG((long int)(&(rightArray[j])), sizeof(Vertex*), 2);
     }
         
     int indexOfSubArrayOne = 0;
@@ -203,6 +207,9 @@ void Merge(LinkedList<Vertex*>* list, int left, int mid, int right)
  
     while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo)
     {
+        LEMEMLOG((long int)(&(leftArray[indexOfSubArrayOne])),sizeof(Vertex*),1);
+        LEMEMLOG((long int)(&(rightArray[indexOfSubArrayTwo])),sizeof(Vertex*),2);
+
         if (leftArray[indexOfSubArrayOne]->IsLessThanOrEqual(rightArray[indexOfSubArrayTwo])) 
         {
             list->SetNodeContent(list->GetNode(indexOfMergedArray), leftArray[indexOfSubArrayOne]);
@@ -218,6 +225,7 @@ void Merge(LinkedList<Vertex*>* list, int left, int mid, int right)
  
     while (indexOfSubArrayOne < subArrayOne) 
     {
+        LEMEMLOG((long int)(&(leftArray[indexOfSubArrayOne])),sizeof(Vertex*),1);
         list->SetNodeContent(list->GetNode(indexOfMergedArray), leftArray[indexOfSubArrayOne]);
         indexOfSubArrayOne++;
         indexOfMergedArray++;
@@ -225,6 +233,7 @@ void Merge(LinkedList<Vertex*>* list, int left, int mid, int right)
  
     while (indexOfSubArrayTwo < subArrayTwo) 
     {
+        LEMEMLOG((long int)(&(rightArray[indexOfSubArrayTwo])),sizeof(Vertex*),2);
         list->SetNodeContent(list->GetNode(indexOfMergedArray), rightArray[indexOfSubArrayTwo]);
         indexOfSubArrayTwo++;
         indexOfMergedArray++;
@@ -296,7 +305,7 @@ LinkedList<Vertex*>* GraphOrderer::HeapSort(LinkedList<Vertex*>* list)
 
 LinkedList<Vertex*>* GraphOrderer::CustomSort(LinkedList<Vertex*>* list)
 {
-    LinkedList<int>* fixedIndexes = new LinkedList<int>();
+    LinkedList<int>* fixedIndexes = new LinkedList<int>(1);
 
     int currentIndex = 0;
     while(fixedIndexes->Length() < list->Length())

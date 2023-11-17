@@ -4,23 +4,23 @@
 #define LINKED_LIST_HPP
 
 /**
- * @brief Exceção lançada quando uma operação é executada em uma lista vazia, ou acesso
- * inválido a algum item.
+ * @brief Exception thrown when an operation is performed on an empty list, or invalid access
+ * to an item occurs.
  *
- * Esta classe representa uma exceção personalizada que é lançada quando uma operação
- * é realizada em uma lista vazia, onde a operação não é válida em tal contexto.
+ * This class represents a custom exception thrown when an operation is performed
+ * on an empty list where the operation is not valid in such a context.
  */
 class element_not_found_exception
-{   };
+{};
 
 /**
- * @brief Estrutura que representa um nó em uma estrutura de dados(compartilhado com lista, fila e pilha).
+ * @brief Structure representing a node in a data structure (shared with list, queue, and stack).
  *
- * Esta estrutura é utilizada para criar nós em uma estrutura. Cada nó contém um elemento
- * de dados do tipo DataType, uma referência para o próximo nó e uma referência para o nó anterior
- * na lista.
+ * This structure is used to create nodes in a structure. Each node contains an element
+ * of data of type DataType, a reference to the next node, and a reference to the previous node
+ * in the list.
  *
- * @tparam DataType O tipo de dados a ser armazenado em um nó.
+ * @tparam DataType The data type to be stored in a node.
  */
 template <class DataType> 
 struct Node
@@ -32,14 +32,14 @@ struct Node
 
 /**
  * @file LinkedList.hpp
- * @brief Classe que representa uma lista encadeada em C++.
+ * @brief Class representing a linked list in C++.
  *
- * Esta classe implementa uma lista duplamente encadeada para armazenar dados do tipo DataType.
- * A lista pode crescer dinamicamente e permite inserir, remover, acessar e verificar a presença
- * de elementos. Ela mantém controle do tamanho e armazena referências para o início e o fim
- * da lista.
+ * This class implements a doubly linked list to store data of type DataType.
+ * The list can grow dynamically and allows for insertion, removal, access, and checking for the presence
+ * of elements. It keeps track of the size and stores references to the beginning and end
+ * of the list.
  *
- * @tparam DataType O tipo de dados dos elementos da lista.
+ * @tparam DataType The data type of the elements in the list.
  */
 template <class DataType> 
 class LinkedList
@@ -54,12 +54,12 @@ class LinkedList
         Node<DataType>* _lastGetNode = nullptr;
 
         /**
-         * @brief Obtém o elemento na posição especificada da lista, com uma busca linar
-         * que pode ser iniciada tanto do primeiro elemento quanto do último, a depender
-         * do caminho mais eficiente.
+         * @brief Gets the element at the specified position in the list, with a linear search
+         * that can be started from either the first or last element, depending on
+         * the most efficient path.
          *
-         * @param index A posição do elemento desejado na lista.
-         * @return O nódulo do elemento na posição especificada.
+         * @param index The position of the desired element in the list.
+         * @return The node of the element at the specified position.
          */
         Node<DataType>* LinearGet(int index)
         {
@@ -91,9 +91,9 @@ class LinkedList
     public:
 
         /**
-         * @brief Construtor padrão da classe LinkedList.
+         * @brief Default constructor for the LinkedList class.
          *
-         * Cria uma nova instância de LinkedList com a lista vazia.
+         * Creates a new instance of LinkedList with an empty list.
          */
         LinkedList()
         {
@@ -103,9 +103,9 @@ class LinkedList
         };
 
         /**
-         * @brief Destrutor da classe LinkedList.
+         * @brief Destructor for the LinkedList class.
          *
-         * Libera a memória alocada para os elementos da lista e destrói a instância da lista.
+         * Frees the memory allocated for the elements of the list and destroys the list instance.
          */
         ~LinkedList()
         {
@@ -124,9 +124,9 @@ class LinkedList
         }
 
         /**
-         * @brief Retorna o tamanho atual da lista.
+         * @brief Returns the current size of the list.
          *
-         * @return O número de elementos na lista.
+         * @return The number of elements in the list.
          */
         int Length()
         {
@@ -134,9 +134,9 @@ class LinkedList
         }
 
         /**
-         * @brief Insere um novo elemento no final da lista.
+         * @brief Inserts a new element at the end of the list.
          *
-         * @param data O elemento a ser inserido na lista.
+         * @param data The element to be inserted into the list.
          */
         void Insert(DataType data)
         {
@@ -161,15 +161,14 @@ class LinkedList
         }
 
         /**
-         * @brief Obtém o elemento na posição especificada da lista. Esse método faz um
-         * gerênciamento interno visando melhorar a performance de acesso aos elementos,
-         * avaliando de que ponto da lista é mais viável começar a busca e armazenando
-         * informações em um formato similar ao cache para permitir que iterações tenham
-         * complexidade O(1).
+         * @brief Gets the element at the specified position in the list. This method does
+         * internal management to improve access performance to the elements,
+         * evaluating from which point of the list it is more viable to start the search and storing
+         * information in a cache-like format to allow iterations to have O(1) complexity.
          *
-         * @param index A posição do elemento desejado na lista.
-         * @return O elemento na posição especificada.
-         * @throw element_not_found_exception Se a lista estiver vazia, ou o indice seja inválido.
+         * @param index The position of the desired element in the list.
+         * @return The element at the specified position.
+         * @throw element_not_found_exception If the list is empty or the index is invalid.
          */
         DataType Get(int index)
         {
@@ -177,10 +176,10 @@ class LinkedList
         }
 
         /**
-         * @brief Retorna o último elemento da lista.
+         * @brief Returns the last element of the list.
          *
-         * @return O último elemento na lista.
-         * @throw element_not_found_exception Se a lista estiver vazia.
+         * @return The last element in the list.
+         * @throw element_not_found_exception If the list is empty.
          */
         DataType Last()
         {
@@ -191,9 +190,9 @@ class LinkedList
         }
 
         /**
-         * @brief Verifica se a lista está vazia.
+         * @brief Checks if the list is empty.
          *
-         * @return true se a lista estiver vazia, false caso contrário.
+         * @return true if the list is empty, false otherwise.
          */
         bool Empty()
         {
@@ -201,10 +200,10 @@ class LinkedList
         }
 
         /**
-         * @brief Verifica se a lista contém um determinado elemento.
+         * @brief Checks if the list contains a specific element.
          *
-         * @param data O elemento a ser procurado na lista.
-         * @return true se o elemento estiver presente na lista, false caso contrário.
+         * @param data The element to be searched for in the list.
+         * @return true if the element is present in the list, false otherwise.
          */
         bool Contains(DataType data)
         {
@@ -222,10 +221,10 @@ class LinkedList
         }
 
         /**
-         * @brief Obtém o elemento na posição especificada da lista.
+         * @brief Gets the element at the specified position in the list.
          * 
-         * @param index A posição do elemento desejado na lista.
-         * @return O nódulo do elemento na posição especificada.
+         * @param index The position of the desired element in the list.
+         * @return The node of the element at the specified position.
         */
         Node<DataType>* GetNode(int index)
         {
@@ -258,10 +257,10 @@ class LinkedList
         }
 
         /**
-         * @brief Inverte o conteúdo de dois nódulos.
+         * @brief Inverts the content of two nodes.
          *
-         * @param first O primeiro nó.
-         * @param second O segundo nó.
+         * @param first The first node.
+         * @param second The second node.
          */
         void InvertNodeContent(Node<DataType>* first, Node<DataType>* second)
         {
@@ -275,10 +274,10 @@ class LinkedList
         }
 
         /**
-         * @brief Troca o conteúdo de um nó.
+         * @brief Sets the content of a node.
          *
-         * @param node O nó a ser atualizado.
-         * @param newData O novo dado.
+         * @param node The node to be updated.
+         * @param newData The new data.
          */
         void SetNodeContent(Node<DataType>* node, DataType newData)
         {

@@ -7,16 +7,15 @@
 #include "LinkedList.hpp"
 
 /**
- * @brief Exceção lançada quando a opção que indica o método de ordenação escolhido
- * é inválida.
+ * @brief Exception thrown when the option indicating the chosen sorting method
+ * is invalid.
  */
 class invalid_orderer_option_exception
-{ };
+{};
 
 /**
- * @brief Esrutura que represetnta um ordenador de grafos. Ela disponibiliza diversos métodos de
- * ordenação e um, e somente um, deles deve ser selecionado pelo caracter informado no contrutor
- * dessa classe.
+ * @brief Structure representing a graph orderer. It provides various sorting methods, and only one of them
+ * should be selected by the character provided in the constructor of this class.
  */
 class GraphOrderer
 {
@@ -25,83 +24,83 @@ class GraphOrderer
         LinkedList<Vertex*>* (*_ordererMethod)(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método BubbleSort para ordenar uma lista.
+         * @brief Applies the BubbleSort method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* BubbleSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método SelectionSort para ordenar uma lista.
+         * @brief Applies the SelectionSort method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* SelectionSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método InsertionSort para ordenar uma lista.
+         * @brief Applies the InsertionSort method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* InsertionSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método QuickSort para ordenar uma lista.
+         * @brief Applies the QuickSort method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* QuickSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método MergeSort para ordenar uma lista.
+         * @brief Applies the MergeSort method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* MergeSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método HeapSort para ordenar uma lista.
+         * @brief Applies the HeapSort method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* HeapSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Responsável por aplicar o método CustomSort(personalziado que pode conter elementos de diversas
-         * fontes distintas) para ordenar uma lista.
+         * @brief Applies the CustomSort (customized, can contain elements from various
+         * distinct sources) method to sort a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         static LinkedList<Vertex*>* CustomSort(LinkedList<Vertex*>* list);
 
         /**
-         * @brief Define o método de ordenação que será chamado pela função Sort. Ele inicializa um ponteiro
-         * para função que irá receber o método escolhido.
+         * @brief Sets the sorting method to be called by the Sort function. It initializes a function pointer
+         * that will receive the chosen method.
          * 
-         * @param option Método de ordenação escolhido.
+         * @param option Chosen sorting method.
         */
         void SelectSortMethod(char option);
 
     public:
         /**
-         * @brief Construtor responsável por inicializar os dados desse ordenador.
+         * @brief Constructor responsible for initializing the data of this orderer.
          * 
-         * @param option Método de ordenação escolhido.
+         * @param option Chosen sorting method.
         */
         GraphOrderer(char option);
 
         /**
-         * @brief Método responsável por aplicar o método escolhido anteriormente a uma lista.
+         * @brief Method responsible for applying the previously chosen method to a list.
          * 
-         * @param list A lista que será ordenada.
-         * @return Um ponteiro para a lista ordenada.
+         * @param list The list to be sorted.
+         * @return A pointer to the sorted list.
         */
         LinkedList<Vertex*>* Sort(LinkedList<Vertex*>* list);
 };

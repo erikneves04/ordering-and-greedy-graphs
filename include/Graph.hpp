@@ -10,7 +10,7 @@
 #include "GraphOrderer.hpp"
 
 /**
- * @brief Estrutura que representa um grafo, e suas dependências(como vértices e demais propriedades).
+ * @brief Structure representing a graph and its dependencies (such as vertices and other properties).
  */
 class Graph
 {
@@ -20,94 +20,94 @@ class Graph
 
     public:
         /**
-         * @brief Construtor padrão da classe Graph.
-         * @param sortOption Caracter que define o método de ordenação a ser utilizado.
+         * @brief Default constructor for the Graph class.
+         * @param sortOption Character defining the sorting method to be used.
          */
         Graph(char sortOption);
 
         /**
-         * @brief Destrutor responsável por liberar a memória alocada por um grafo.
-        */
+         * @brief Destructor responsible for freeing the memory allocated for a graph.
+         */
         ~Graph();
 
         /**
-         * @brief Adiciona um novo vértice a esse grafo.
+         * @brief Adds a new vertex to this graph.
          *
-         * @param vertex Um ponteiro para o novo vértice.
+         * @param vertex A pointer to the new vertex.
          */
         void AddVertex(Vertex* vertex);
 
         /**
-         * @brief Adiciona ama arestra entre dois vértices do grafo.
+         * @brief Adds an edge between two vertices in the graph.
          *
-         * @param vertex1 Um ponteiro para o primeiro vértice.
-         * @param vertex2 Um ponteiro para o segundo vértice.
+         * @param vertex1 A pointer to the first vertex.
+         * @param vertex2 A pointer to the second vertex.
          */
         void AddEdge(Vertex* vertex1, Vertex* vertex2);
 
         /**
-         * @brief Retorna os vértices pertencentes a esse grafo.
+         * @brief Returns the vertices belonging to this graph.
          * 
-         * @return Um ponteiro para a lista encadeada com os vértices.
+         * @return A pointer to the linked list with the vertices.
          */
         LinkedList<Vertex*>* GetVertices();
 
         /**
-         * @brief Retorna o vértice na posição especificada.
+         * @brief Returns the vertex at the specified position.
          * 
-         * @param index Posição buscada.
+         * @param index The desired position.
          * 
-         * @return Um ponteiro para o vértice buscado.
+         * @return A pointer to the desired vertex.
          */
         Vertex* GetVertex(int index);
 
         /**
-         * @brief Checa se esse grafo é "guloso". Ou seja, todos os vértices possuem conexão
-         * com todas as cores menores que a própria coloração.
+         * @brief Checks if this graph is "greedy". That is, all vertices have a connection
+         * with all colors smaller than their own coloring.
          * 
-         * @return true caso seja "guloso", false caso contrário.
+         * @return true if "greedy," false otherwise.
          */
         bool IsGreedy();
 
         /**
-         * @brief Retorna uma string com os vértices ordenados de acordo com o método de ordenação selecionado.
+         * @brief Returns a string with the vertices ordered according to the selected sorting method.
          * 
-         * @return Uma string com os vértices ordenados.
-        */
+         * @return A string with the ordered vertices.
+         */
         std::string OrderedVertices();
 
         /**
-         * @brief Atualiza a coloração de um determinado vértice do grafo.
+         * @brief Updates the coloring of a specific vertex in the graph.
          *
-         * @param index Posição alvo.
-         * @param color Nova coloração.
+         * @param index Target position.
+         * @param color New coloring.
          */
         void SetVertexColor(int index, int color);
 
         /**
-         * @brief Conta os vértices desse grafo.
+         * @brief Counts the vertices in this graph.
          *
-         * @return O número de vértices presentes.
+         * @return The number of vertices present.
          */
         int VertexCount();
 
         /**
-         * @brief Conta as arestras de todos os vértices desse grafo.
+         * @brief Counts the edges of all vertices in this graph.
          *
-         * @return O número de arestras presentes.
+         * @return The number of edges present.
          */
         int EdgeCount();
 
         /**
-         * @brief Constrói um grafo com base nas informações fornecidas pela entrada padrão, 
-         * seguindo a estrutura da documentação provida.
+         * @brief Builds a graph based on the information provided by the standard input, 
+         * following the structure of the provided documentation.
          *
-         * @return Um ponteiro para o vértice com as novas informações.
+         * @return A pointer to the vertex with the new information.
          */
         static Graph* BuildFromIoStream();
 
         /**
-         * @brief Imprime as informações do grafo na saída padrão.
+         * @brief Prints the graph information to the standard output.
          */
         void Print();
 };
